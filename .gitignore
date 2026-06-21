@@ -1,0 +1,6 @@
+.vs/
+__pycache__/
+*.pyc
+.env
+temp_*.mp3
+pdf_*.pdf

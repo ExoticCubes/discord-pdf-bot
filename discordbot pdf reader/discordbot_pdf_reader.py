@@ -12,7 +12,7 @@ import edge_tts
 
 # Configuration
  
-BOT_TOKEN = os.environ.get("MTUxNzEyMTIwOTQ3NTUzMDgzNA.G0raiL.z6PSZZ2X--61AIGBk_AJKJEilFWjQqjkviqG_0")
+BOT_TOKEN = os.environ.get("DISCORD_BOT_TOKEN")
 VOICE_NAME = "en-GB-RyanNeural"   # here to change the voices 
 SPEECH_RATE = "-10%"             # - will slow it down, + will speeds it up
 MAX_CHUNK_CHARS = 800
@@ -239,7 +239,7 @@ async def on_ready():
  
  
 if __name__ == "__main__":
-    if BOT_TOKEN == "MTUxNzEyMTIwOTQ3NTUzMDgzNA.G0raiL.z6PSZZ2X--61AIGBk_AJKJEilFWjQqjkviqG_0":
-        print("Set BOT_TOKEN at the top of the file or the DISCORD_BOT_TOKEN env variable.")
+    if not BOT_TOKEN:
+        print("Set the DISCORD_BOT_TOKEN environment variable.")
     else:
-        bot.run("MTUxNzEyMTIwOTQ3NTUzMDgzNA.G0raiL.z6PSZZ2X--61AIGBk_AJKJEilFWjQqjkviqG_0")
+        bot.run(BOT_TOKEN)

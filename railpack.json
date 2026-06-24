@@ -1,0 +1,7 @@
+{
+  "$schema": "https://schema.railpack.com",
+  "deploy": {
+    "aptPackages": ["ffmpeg"],
+    "startCommand": "python discordbot_pdf_reader.py"
+  }
+}

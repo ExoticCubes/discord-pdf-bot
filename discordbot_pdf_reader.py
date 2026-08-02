@@ -10,11 +10,11 @@ import PyPDF2
 import edge_tts
 
 
-# Configuration
+
  
 BOT_TOKEN = os.environ.get("DISCORD_BOT_TOKEN")
-VOICE_NAME = "en-GB-RyanNeural"   # here to change the voices 
-SPEECH_RATE = "-10%"             # - will slow it down, + will speeds it up
+VOICE_NAME = "en-GB-RyanNeural"   
+SPEECH_RATE = "-10%"            
 MAX_CHUNK_CHARS = 800
  
 intents = discord.Intents.default()
@@ -23,14 +23,14 @@ intents.voice_states = True
  
 bot = commands.Bot(command_prefix="!", intents=intents)
  
-# Text processing helpers
+
  
 def clean_text(text: Optional[str]) -> str:
     if not text:
         return ""
-    text = text.replace("-\n", "")     # rejoin hyphenated words split across lines
-    text = text.replace("\n", " ")     # turn remaining line breaks into spaces
-    text = re.sub(r"\s+", " ", text)   # here to collapse repeated whitespace
+    text = text.replace("-\n", "")     
+    text = text.replace("\n", " ")     
+    text = re.sub(r"\s+", " ", text)   
     return text.strip()
  
  
@@ -49,7 +49,7 @@ def split_into_chunks(text: str, max_len: int = MAX_CHUNK_CHARS):
     return chunks
  
  
-# Per-guild reading session
+
  
 @dataclass
 class Session:
@@ -69,7 +69,7 @@ async def play_next(guild_id: int):
     if not session or session.stopped:
         return
  
-    # Clean up the file that just finished playing
+    
     if session.current_file and os.path.exists(session.current_file):
         try:
             os.remove(session.current_file)
@@ -96,7 +96,7 @@ async def play_next(guild_id: int):
         return
  
     if session.stopped:
-        # here if !stop was called while audio was generating
+        
         if os.path.exists(filename):
             os.remove(filename)
         return
@@ -128,7 +128,7 @@ async def finish_session(guild_id: int, message: Optional[str] = None):
         except Exception:
             pass
  
-# Discord Commands
+
  
 @bot.command(name="read")
 async def read(ctx: commands.Context):
@@ -213,7 +213,7 @@ async def resume(ctx: commands.Context):
 async def skip(ctx: commands.Context):
     vc = ctx.voice_client
     if vc and (vc.is_playing() or vc.is_paused()):
-        vc.stop()  # will trigger the after-callback, which advances to the next chunk
+        vc.stop()  
         await ctx.send("Skipped to the next part.")
     else:
         await ctx.send("Nothing to skip.")
